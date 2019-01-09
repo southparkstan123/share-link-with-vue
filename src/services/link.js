@@ -1,4 +1,3 @@
-/* @flow */
 import { database } from '../firebase'
 import uuidv1 from 'uuid/v1'
 
