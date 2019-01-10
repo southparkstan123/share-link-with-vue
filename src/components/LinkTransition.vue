@@ -5,10 +5,10 @@
 </template>
 
 <style>
-    .list-enter-active, .list-leave-active {
-        transition: opacity .5s ease-out;
-    }
-    .list-enter, .list-leave-to {
-        opacity: 0;
-    }
+    .list-leave { opacity: 1; }
+    .list-leave-active { transition: opacity .5s }
+    .list-leave-to { opacity: 0; }
+    .list-enter { opacity: 0; }
+    .list-enter-active  { transition: opacity .5s }
+    .list-enter-to { opacity: 1; }
 </style>
