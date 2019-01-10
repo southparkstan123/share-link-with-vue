@@ -10,8 +10,10 @@
         <h1 class="text-center">No Links</h1>
       </div>
       <div class="list" v-else>
-        <link-list-table v-if="view === 'table'" v-bind:links="links"></link-list-table>
-        <link-list-grid v-else v-bind:links="links"></link-list-grid>
+        <link-transition mode="out-in">
+          <link-list-table v-if="view === 'table'" v-bind:links="links"></link-list-table>
+          <link-list-grid v-else v-bind:links="links"></link-list-grid>
+        </link-transition>
       </div>
     </div>
 </template>
@@ -24,6 +26,7 @@ import LinkListTable from '../components/LinkListTable'
 import LinkForm from '../components/LinkForm'
 import Loading from '../components/Loading'
 import queryString from 'query-string'
+import LinkTransition from '../components/LinkTransition'
 
 import bButton from 'bootstrap-vue/es/components/button/button'
 import { mapGetters } from 'vuex'
@@ -35,7 +38,8 @@ export default {
     'link-list-table': LinkListTable,
     'b-btn': bButton,
     'link-form': LinkForm,
-    'loading': Loading
+    'loading': Loading,
+    'link-transition': LinkTransition
   },
   computed: mapGetters({
     links: 'link/getAllLinks',
@@ -68,7 +72,7 @@ export default {
     this.$store.dispatch('siteConfig/toggleListPageView', this.loadListViewFromQueryString())
     setTimeout(() => {
       this.$store.dispatch('siteConfig/loadedAction', false)
-    }, 1500)
+    }, 2000)
   },
   mounted () {
     this.$store.dispatch('link/getAllLinks')
