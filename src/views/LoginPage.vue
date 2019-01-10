@@ -1,5 +1,5 @@
 <template>
-  <b-jumbotron header="Welcome to ShareLink">
+  <b-card id="loginPanel" header="Welcome to ShareLink">
     <b-form-group id="fieldsetHorizontal" horizontal :label-cols="2" breakpoint="md" label="Email" label-for="inputHorizontal">
       <b-form-input v-model="email" type="email" placeholder="Enter your email"/>
     </b-form-group>
@@ -10,7 +10,7 @@
       <b-button type="submit" variant="success" class="mx-2" @click="onLogin">Login</b-button>
       <b-button type="button" variant="primary" @click="routeToRegisterPage">Register</b-button>
     </b-row>
-  </b-jumbotron>
+  </b-card>
 </template>
 
 <script>
@@ -55,5 +55,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  #loginPanel {
+    max-width: 500px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
