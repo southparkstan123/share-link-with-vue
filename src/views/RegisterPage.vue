@@ -42,6 +42,7 @@ import bForm from 'bootstrap-vue/es/components/form/form'
 import bInputGroup from 'bootstrap-vue/es/components/input-group/input-group'
 import { validationMixin } from 'vuelidate'
 import { email, required, sameAs, minLength } from 'vuelidate/lib/validators'
+import UserService from '../services/user'
 
 export default {
   components: {
@@ -57,7 +58,17 @@ export default {
       }
     }
   },
+  beforeMount () {
+    this.checkAuth()
+  },
   methods: {
+    checkAuth () {
+      UserService.isAuth(userInfo => {
+        if (userInfo) {
+          this.$router.replace('/')
+        }
+      })
+    },
     onRegister () {
       this.$store
         .dispatch('user/register', {

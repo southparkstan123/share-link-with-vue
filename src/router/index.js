@@ -7,6 +7,7 @@ import PageNotFound from '@/views/PageNotFound'
 import LoginPage from '@/views/LoginPage'
 import RegisterPage from '@/views/RegisterPage'
 import {auth} from '../firebase'
+import UserService from '../services/user'
 
 Vue.use(Router)
 
@@ -60,7 +61,7 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
   if (requiresAuth && !currentUser) {
-    auth.onAuthStateChanged((firebaseUser) => {
+    UserService.isAuth((firebaseUser) => {
       if (firebaseUser) {
         next('/')
       } else {
