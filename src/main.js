@@ -3,13 +3,11 @@ import App from './App'
 import router from './router'
 import store from './store'
 import BootstrapVue from 'bootstrap-vue'
-import VueTweening from 'vue-tweening'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import {auth} from './firebase'
 
 Vue.use(BootstrapVue)
-Vue.use(VueTweening)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
