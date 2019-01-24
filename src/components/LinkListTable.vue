@@ -9,13 +9,13 @@
     <template slot="actions" slot-scope="row">
       <b-button-group>
         <b-btn variant="success" size="sm" @click="routeToEditPage(row.item.id)">
-            <i class="fas fa-edit"></i>
+            <font-awesome-icon icon="edit"></font-awesome-icon>
         </b-btn>
         <b-btn variant="danger" size="sm" @click="deleteLink(row.item.id)">
-            <i class="fas fa-trash-alt"></i>
+            <font-awesome-icon icon="trash-alt"></font-awesome-icon>
         </b-btn>
         <b-btn v-if="isTagNotEmptyOrDefined(row.item)" size="sm" @click.stop="row.toggleDetails" class="mr-2">
-            {{ row.detailsShowing ? 'Hide' : 'Show'}} <i class="fas fa-tags"></i>
+            {{ row.detailsShowing ? 'Hide' : 'Show'}} <font-awesome-icon icon="tags"></font-awesome-icon>
         </b-btn>
       </b-button-group>
     </template>
