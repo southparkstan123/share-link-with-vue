@@ -2,9 +2,17 @@
     <loading v-if="isLoading"></loading>
     <div v-else>
       <search-bar></search-bar>
-      <div class="input-wrapper">
-        <b-btn variant="info" @click="routeToAddLink">Create Link</b-btn>
-        <b-btn variant="warning" @click="routeToChangeView">{{ view | isTableView}}</b-btn>
+      <div class="control-panel clearfix">
+        <div class="float-left clearfix">
+        </div>
+        <div class="float-right clearfix">
+          <b-btn variant="outline-info" @click="routeToAddLink">
+            <font-awesome-icon icon="plus"></font-awesome-icon>
+          </b-btn>
+          <b-btn variant="outline-warning" @click="routeToChangeView">
+            <font-awesome-icon :icon="view | isTableView"></font-awesome-icon>
+          </b-btn>
+        </div>
       </div>
       <div v-if="links.length === 0">
         <h1 class="text-center">No Links</h1>
@@ -48,7 +56,7 @@ export default {
   }),
   filters: {
     isTableView (value) {
-      return (value === 'table') ? 'Grid View' : 'Table View'
+      return (value === 'table') ? 'th' : 'table'
     }
   },
   methods: {
@@ -87,5 +95,8 @@ export default {
   }
   .input-wrapper{
     margin-top: 10px;
+  }
+  .control-panel{
+    margin: 10px;
   }
 </style>
