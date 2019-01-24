@@ -1,5 +1,5 @@
 <template>
-  <b-table responsive striped hover :fields="fields" :items="links">
+  <b-table stacked="md" responsive striped hover :fields="fields" :items="links">
     <template slot="title" slot-scope="row">
         <a v-bind:href="row.item.url" target="_blank">{{row.item.title}}</a>
     </template>
@@ -54,7 +54,7 @@ export default {
         },
         {
           key: 'isShared',
-          label: 'Is shared?',
+          label: 'Shared?',
           formatter: (value) => {
             return (value === true) ? 'Shared' : 'Click to share'
           }
