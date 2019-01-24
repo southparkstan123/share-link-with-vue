@@ -1,7 +1,7 @@
 <template>
     <div>
         <loading v-if="isLoading"></loading>
-        <link-form v-bind:link="link" v-bind:pageTitle="'Edit Page'" v-else></link-form>
+        <link-form v-bind:link="link" v-bind:pageTitle="'Edit Link'" v-else></link-form>
     </div>
 </template>
 
