@@ -4,6 +4,7 @@ const state = {
   title: '',
   message: '',
   code: '',
+  type: 'info',
   show: false
 }
 
@@ -25,12 +26,14 @@ const mutations = {
     state.title = (obj.code) ? (obj.code === '200' ? 'Success' : 'Error') : obj.title
     state.message = obj.message
     state.code = obj.code
+    state.type = obj.type
     state.show = true
   },
   closeModal () {
     state.title = ''
     state.message = ''
     state.code = ''
+    state.type = 'info'
     state.show = false
   }
 }
