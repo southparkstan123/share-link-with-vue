@@ -4,6 +4,7 @@ import link from './modules/link'
 import user from './modules/user'
 import message from './modules/message'
 import siteConfig from './modules/siteConfig'
+import modal from './modules/modal'
 import Vuelidate from 'vuelidate'
 
 Vue.use(Vuelidate)
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     link,
     user,
     message,
-    siteConfig
+    siteConfig,
+    modal
   }
 })

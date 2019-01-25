@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <modal></modal>
     <div v-if="isLogin">
       <nav-bar></nav-bar>
     </div>
@@ -15,6 +16,7 @@
 <script>
 import NavBar from './components/NavBar'
 import Alert from './components/Alert'
+import Modal from './components/Modal'
 import { mapGetters } from 'vuex'
 import UserService from './services/user'
 
@@ -22,7 +24,8 @@ export default {
   name: 'App',
   components: {
     'alert': Alert,
-    'nav-bar': NavBar
+    'nav-bar': NavBar,
+    'modal': Modal
   },
   computed: {
     ...mapGetters({
