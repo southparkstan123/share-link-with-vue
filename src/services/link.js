@@ -74,8 +74,12 @@ export default class LinkService {
   }
 
   static async toggleShareLink (data) {
+    const d = new Date()
+    const timestamp = d.getTime()
+
     let obj = data
     obj['isShared'] = !obj['isShared']
+    obj['updateAt'] = timestamp
 
     try {
       await database.ref('links').child(obj.id).update(obj)
