@@ -5,7 +5,9 @@ const state = {
   message: '',
   code: '',
   type: 'info',
-  show: false
+  show: false,
+  action_type: '',
+  payload: {}
 }
 
 const getters = {
@@ -13,10 +15,10 @@ const getters = {
 }
 
 const actions = {
-  openMessage ({ commit }, obj) {
+  openModal ({ commit }, obj) {
     commit('openModal', obj)
   },
-  closeMessage ({ commit }) {
+  closeModal ({ commit }) {
     commit('closeModal')
   }
 }
@@ -27,6 +29,8 @@ const mutations = {
     state.message = obj.message
     state.code = obj.code
     state.type = obj.type
+    state.action_type = obj.action_type
+    state.payload = obj.payload
     state.show = true
   },
   closeModal () {
@@ -35,6 +39,8 @@ const mutations = {
     state.code = ''
     state.type = 'info'
     state.show = false
+    state.action_type = ''
+    state.payload = {}
   }
 }
 

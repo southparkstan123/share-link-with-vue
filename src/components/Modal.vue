@@ -30,12 +30,12 @@ export default {
       }
     },
     doCancel () {
-      console.log('Cancel and modal to be closed!')
       this.$store.commit('modal/closeModal')
     },
     doConfirm () {
-      console.log('Confirm and modal to be closed!')
-      this.$store.commit('modal/closeModal')
+      this.$store.dispatch(this.modalObj.action_type, this.modalObj.payload).then(() => {
+        this.$store.commit('modal/closeModal')
+      })
     }
   }
 }

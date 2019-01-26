@@ -21,14 +21,11 @@ const actions = {
       commit('getNumberOfSharedLinks')
     }).catch(e => commit('message/setMessage', e, { root: true }))
   },
-  deleteLink ({ commit }, id) {
-    const r = confirm('Are you sure to delete this link ?')
-    if (r === true) {
-      LinkService.deleteLink(id).then(() => {
-        commit('deleteLink', id)
-        commit('message/setMessage', {code: '200', message: 'Link deleted!'}, { root: true })
-      }).catch(e => commit('message/setMessage', e, { root: true }))
-    }
+  deleteLink ({ commit }, payload) {
+    LinkService.deleteLink(payload.id).then(() => {
+      commit('deleteLink', payload.id)
+      commit('message/setMessage', {code: '200', message: 'Link deleted!'}, { root: true })
+    }).catch(e => commit('message/setMessage', e, { root: true }))
   },
   getLink ({ commit }, payload) {
     LinkService.getLink(payload).then((snapshot) => {

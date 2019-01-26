@@ -76,7 +76,7 @@ export default {
       return query && query['view'] ? query['view'] + '' : ''
     },
     showModal () {
-      this.$store.commit('modal/openModal', {title: 'This is title!', message: 'Modal is opened!'})
+      this.$store.commit('modal/openModal', {title: 'Hello!', message: 'This is a CURD single-page application by vue and firebase.'})
     }
   },
   beforeMount () {
