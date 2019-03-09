@@ -68,8 +68,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      toggleShareState: 'link/toggleShareLink',
-      deleteLink: 'link/deleteLink'
+      toggleShareState: 'link/toggleShareLink'
     }),
     routeToEditPage (id) {
       const path = '/edit_link/' + id
@@ -77,6 +76,16 @@ export default {
     },
     isTagNotEmptyOrDefined (link) {
       return !_.isUndefined(link.tags) || !_.isEmpty(link.tags)
+    },
+    deleteLink (id) {
+      const modalObj = {
+        title: 'Delete Link',
+        message: 'Are you sure to delete this link ?',
+        type: 'confirm',
+        action_type: 'link/deleteLink',
+        payload: {id}
+      }
+      this.$store.commit('modal/openModal', modalObj, { root: true })
     }
   }
 }

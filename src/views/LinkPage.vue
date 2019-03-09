@@ -6,6 +6,7 @@
         <div class="float-left clearfix">
         </div>
         <div class="float-right clearfix">
+          <b-btn variant="outline-primary" @click="showModal">Infomation</b-btn>
           <b-btn variant="outline-info" @click="routeToAddLink">
             <font-awesome-icon icon="plus"></font-awesome-icon>
           </b-btn>
@@ -73,6 +74,9 @@ export default {
     loadListViewFromQueryString () {
       const query = queryString.parse(location.search)
       return query && query['view'] ? query['view'] + '' : ''
+    },
+    showModal () {
+      this.$store.commit('modal/openModal', {title: 'Hello!', message: 'This is a CURD single-page application by vue and firebase.'})
     }
   },
   beforeMount () {

@@ -13,50 +13,64 @@ const state = {
 const namespaced = true
 
 const actions = {
-  getAllLinks ({ commit }) {
-    LinkService.getAllLinks().then((result) => {
-      // Sort the records descending order by 'updateAt' value
+  async getAllLinks ({ commit }) {
+    try {
+      const result = await LinkService.getAllLinks()
       commit('setLinks', result.sort((a, b) => b.updateAt - a.updateAt))
       commit('getNumberOfLinks')
       commit('getNumberOfSharedLinks')
-    }).catch(e => commit('message/setMessage', e, { root: true }))
-  },
-  deleteLink ({ commit }, id) {
-    const r = confirm('Are you sure to delete this link ?')
-    if (r === true) {
-      LinkService.deleteLink(id).then(() => {
-        commit('deleteLink', id)
-        commit('message/setMessage', {code: '200', message: 'Link deleted!'}, { root: true })
-      }).catch(e => commit('message/setMessage', e, { root: true }))
+    } catch (e) {
+      commit('message/setMessage', e, { root: true })
     }
   },
-  getLink ({ commit }, payload) {
-    LinkService.getLink(payload).then((snapshot) => {
-      if (snapshot.exists()) {
-        commit('getLink', snapshot.val())
+  async deleteLink ({ commit }, payload) {
+    try {
+      await LinkService.deleteLink(payload.id)
+      commit('deleteLink', payload.id)
+      commit('message/setMessage', {code: '200', message: 'Link deleted!'}, { root: true })
+    } catch (e) {
+      commit('message/setMessage', e, { root: true })
+    }
+  },
+  async getLink ({ commit }, payload) {
+    try {
+      const result = await LinkService.getLink(payload)
+      if (result.exists()) {
+        commit('getLink', result.val())
+      } else {
+        commit('message/setMessage', {code: '404', message: 'Link not found!'}, { root: true })
       }
-    }).catch(e => commit('message/setMessage', e, { root: true }))
+    } catch (e) {
+      commit('message/setMessage', e, { root: true })
+    }
   },
-  updateLink ({ commit }, data) {
-    LinkService.updateLink(data)
-      .then((obj) => {
-        commit('updateLink', obj)
-        commit('message/setMessage', {code: '200', message: 'Link updated!'}, { root: true })
-      })
-      .catch(e => commit('message/setMessage', e, { root: true }))
+  async updateLink ({ commit }, data) {
+    try {
+      const result = await LinkService.updateLink(data)
+      commit('updateLink', result)
+      commit('message/setMessage', {code: '200', message: 'Link updated!'}, { root: true })
+    } catch (e) {
+      commit('message/setMessage', e, { root: true })
+    }
   },
-  toggleShareLink ({commit}, payload) {
-    LinkService.toggleShareLink(payload).then((obj) => {
-      commit('updateLink', obj)
+  async toggleShareLink ({commit}, payload) {
+    try {
+      const result = await LinkService.toggleShareLink(payload)
+      commit('updateLink', result)
       commit('getNumberOfLinks')
       commit('getNumberOfSharedLinks')
-    }).catch(e => commit('message/setMessage', e, { root: true }))
+    } catch (e) {
+      commit('message/setMessage', e, { root: true })
+    }
   },
-  addLink ({ commit }, data) {
-    LinkService.addlink(data).then((obj) => {
-      commit('addLink', obj)
+  async addLink ({ commit }, data) {
+    try {
+      const result = await LinkService.addlink(data)
+      commit('addLink', result)
       commit('message/setMessage', {code: '200', message: 'Link created!'}, { root: true })
-    }).catch(e => commit('message/setMessage', e, { root: true }))
+    } catch (e) {
+      commit('message/setMessage', e, { root: true })
+    }
   },
   searchLinkByTag ({ commit }, keyword) {
     commit('searchLinkByTag', keyword)
