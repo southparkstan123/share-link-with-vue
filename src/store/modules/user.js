@@ -11,28 +11,26 @@ const getters = {
 }
 
 const actions = {
-  login ({ commit }, user) {
-    UserService.login(user.email, user.password).then(
-      (firebaseUser) => {
-        commit('setUserInfo', firebaseUser)
-      }
-    ).catch(e => commit('message/setMessage', e, { root: true }))
-  },
-  logout ({ commit }) {
-    UserService.logout().then(() => {
-      commit('clearUserInfo')
-      commit('link/clearAllData', undefined, { root: true })
-    })
-  },
-  register ({ commit }, user) {
-    UserService.register(user.email, user.password).then(
-      () => {
-        commit('message/setMessage', {code: '200', message: 'User created!'}, { root: true })
-      }
-    ).catch(e => {
-      alert(e.message)
+  async login ({ commit }, user) {
+    try {
+      const result = await UserService.login(user.email, user.password)
+      commit('setUserInfo', result)
+    } catch (e) {
       commit('message/setMessage', e, { root: true })
-    })
+    }
+  },
+  async logout ({ commit }) {
+    await UserService.logout()
+    commit('clearUserInfo')
+    commit('link/clearAllData', undefined, { root: true })
+  },
+  async register ({ commit }, user) {
+    try {
+      await UserService.register(user.email, user.password)
+      commit('message/setMessage', {code: '200', message: 'User created!'}, { root: true })
+    } catch (e) {
+      commit('message/setMessage', e, { root: true })
+    }
   }
 }
 
