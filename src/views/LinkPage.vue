@@ -19,9 +19,13 @@
         <h1 class="text-center">No Links</h1>
       </div>
       <div class="list" v-else>
-        <link-transition mode="out-in">
-          <link-list-table v-if="view === 'table'" v-bind:links="links"></link-list-table>
-          <link-list-grid v-else v-bind:links="links"></link-list-grid>
+        <link-transition>
+          <div v-if="view === 'table'" key="table">
+            <link-list-table v-bind:links="links"></link-list-table>
+          </div>
+          <div v-else key="grid">
+            <link-list-grid  v-bind:links="links"></link-list-grid>
+          </div>
         </link-transition>
       </div>
     </div>
@@ -64,8 +68,10 @@ export default {
     routeToChangeView () {
       const path = '/'
       const query = {'view': (this.view === 'table') ? 'grid' : 'table'}
-      this.$store.dispatch('siteConfig/toggleListPageView', query.view)
-      this.$router.replace({path, query})
+      setTimeout(() => {
+        this.$store.dispatch('siteConfig/toggleListPageView', query.view)
+        this.$router.replace({path, query})
+      }, 0)
     },
     routeToAddLink (id) {
       const path = '/add_link'
