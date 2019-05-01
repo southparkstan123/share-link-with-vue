@@ -20,12 +20,6 @@
       </div>
       <div class="list" v-else>
         <link-transition>
-          <!-- <div v-if="view === 'table'" key="table">
-            <link-list-table v-bind:links="links"></link-list-table>
-          </div>
-          <div v-else key="grid">
-            <link-list-grid  v-bind:links="links"></link-list-grid>
-          </div> -->
           <component :is="listView" :links="links"></component>
         </link-transition>
       </div>
