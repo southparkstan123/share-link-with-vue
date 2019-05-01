@@ -6,7 +6,6 @@
 
 <style>
   .hide {
-    transform: translateX(20px);
     opacity: 0;
   }
   .slide-in {
