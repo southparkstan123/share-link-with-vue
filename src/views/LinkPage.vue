@@ -20,12 +20,13 @@
       </div>
       <div class="list" v-else>
         <link-transition>
-          <div v-if="view === 'table'" key="table">
+          <!-- <div v-if="view === 'table'" key="table">
             <link-list-table v-bind:links="links"></link-list-table>
           </div>
           <div v-else key="grid">
             <link-list-grid  v-bind:links="links"></link-list-grid>
-          </div>
+          </div> -->
+          <component :is="listView" :links="links"></component>
         </link-transition>
       </div>
     </div>
@@ -45,6 +46,11 @@ import bButton from 'bootstrap-vue/es/components/button/button'
 import { mapGetters } from 'vuex'
 
 export default {
+  data () {
+    return {
+      listView: ''
+    }
+  },
   components: {
     'search-bar': SearchBar,
     'link-list-grid': LinkListGrid,
@@ -64,7 +70,17 @@ export default {
       return (value === 'table') ? 'th' : 'table'
     }
   },
+  updated () {
+    this.mapViewToComponent()
+  },
   methods: {
+    mapViewToComponent () {
+      if (this.view === 'table') {
+        this.listView = 'link-list-table'
+      } else {
+        this.listView = 'link-list-grid'
+      }
+    },
     routeToChangeView () {
       const path = '/'
       const query = {'view': (this.view === 'table') ? 'grid' : 'table'}
@@ -93,7 +109,9 @@ export default {
     }, 2000)
   },
   mounted () {
-    this.$store.dispatch('link/getAllLinks')
+    this.$store.dispatch('link/getAllLinks').then(() => {
+      this.mapViewToComponent()
+    })
   }
 }
 </script>
